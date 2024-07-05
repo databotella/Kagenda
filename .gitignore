@@ -1,0 +1,19 @@
+# Dependências do Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Diretórios de build
+dist/
+build/
+
+# Arquivos de configuração locais
+.env
+.DS_Store
+
+# Logs
+*.log
+
+# Arquivos de cache
+.cache/
+.parcel-cache/
