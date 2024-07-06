@@ -19,7 +19,7 @@ const config = {
     database: 'Kagenda',
     options: {
         trustServerCertificate: true,
-        trustedConnection: true,
+        trustedConnection: false,
         enableArithAbort: true,
         instancename: 'SQLEXPRESS'
     },

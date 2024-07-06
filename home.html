@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<!-- Adicione no início do corpo do home.html -->
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const token = localStorage.getItem('token');
+		if (!token) {
+			window.location.href = 'index.html';
+		}
+	});
+</script>
+
+<head>
+	<title>Kagenda - Página Inicial</title>
+	<!-- Bootstrap CSS -->
+	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Font Awesome CSS -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+	<style>
+		body {
+			padding: 20px;
+			background-color: #f8f9fa;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="container">
+		<h1 class="text-center">Bem-vindo ao Kagenda!</h1>
+		<p class="text-center">Esta é sua página inicial.</p>
+		<button id="logout" class="btn btn-danger btn-block">Sair</button>
+	</div>
+
+	<!-- jQuery, Popper.js, Bootstrap JS -->
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+	<script>
+		const logoutButton = document.getElementById('logout');
+
+		logoutButton.addEventListener('click', () => {
+			localStorage.removeItem('token');
+			window.location.href = 'index.html';
+		});
+	</script>
+</body>
+
+</html>

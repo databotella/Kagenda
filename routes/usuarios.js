@@ -34,22 +34,22 @@ router.post('/login', async (req, res) => {
   try {
     // Buscar o usuário no banco de dados 
     // const user = await findUserByUsername(username);
-      let pool = await sql.connect(req.sqlConfig);
-      let result = await pool.request()
-        .input('username', sql.VarChar, username)
-        .query('SELECT * FROM Usuarios WHERE nome = @username');
-        // Verificar se o usuário existe e se a senha está correta
-      
-        const user = result.recordset[0];
+    let pool = await sql.connect(req.sqlConfig);
+    let result = await pool.request()
+      .input('username', sql.VarChar, username)
+      .query('SELECT * FROM Usuarios WHERE nome = @username');
+    // Verificar se o usuário existe e se a senha está correta
 
-      if (user && await bcrypt.compare(password, user.password)) {
-        const token = jwt.sign({ userId: user.id }, 'seu_segredo', { expiresIn: '1h' });
-        res.json({ token });
-      } else {
-        res.status(401).json({ error: 'Credenciais inválidas' });
-      }
+    const user = result.recordset[0];
+
+    if (user && await bcrypt.compare(password, user.password)) {
+      const token = jwt.sign({ userId: user.id }, 'seu_segredo', { expiresIn: '1h' });
+      res.json({ token });
+    } else {
+      res.status(401).json({ error: 'Credenciais inválidas' });
+    }
   } catch (error) {
-      res.status(500).json({ error: 'Erro ao realizar login' });
+    res.status(500).json({ error: 'Erro ao realizar login' });
   }
 });
 

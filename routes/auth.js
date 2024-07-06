@@ -14,6 +14,7 @@ router.post('/register', async (req, res) => {
 
     try {
         let pool = await sql.connect(req.sqlConfig);
+        console.log('Conectado ao banco de dados'); // Log para debug
         let result = await pool.request()
             .input('username', sql.VarChar, username)
             .input('password', sql.VarChar, hashedPassword)
@@ -29,17 +30,20 @@ router.post('/register', async (req, res) => {
 router.post('/login', async (req, res) => {
     console.log('Recebendo requisição de login'); // Log para debug     
     const { username, password } = req.body;
-
     try {
         let pool = await sql.connect(req.sqlConfig);
         let result = await pool.request()
             .input('username', sql.VarChar, username)
-            .query('SELECT * FROM Usuarios WHERE nome = @username');
+            .query('SELECT * FROM Usuarios WHERE username = @username');
+        console.log(result.recordset); // Log para debug
 
+        // Verificar se o usuário existe e se a senha está correta
         const user = result.recordset[0];
 
         if (user && await bcrypt.compare(password, user.password)) {
             const token = jwt.sign({ userId: user.id }, secretKey, { expiresIn: '1h' });
+            console.log('Login realizado com sucesso!'); // Log para debug
+
             console.log('Login realizado com sucesso!'); // Log para debug
             res.json({ token });
         } else {
