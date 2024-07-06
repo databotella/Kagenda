@@ -2,12 +2,31 @@
 <html>
 
 <head>
-    <title>Hello Electron</title>
+    <title>Kage</title>
 </head>
 
 <body>
-    <h1>Hello World!</h1>
-    <p>This is your Electron application.</p>
+    <h1>Bem vindo a agendinha do mal!</h1>
+    <p>This is your Electron.JS application.</p>
+    <div>
+        <button id="btn">Click me</button>
+    </div>
+    <p id="response"></p>
+    <script>
+        const axios = require('axios');
+        const btn = document.getElementById('btn');
+        const responseP = document.getElementById('response');
+
+        btn.addEventListener('click', async () => {
+            try {
+                const response = await axios.get('http://localhost:3000/');
+                responseP.innerText = response.data.message;
+            } catch (error) {
+                responseP.innerText = 'Erro ao conectar ao backend';
+                console.error(error);
+            }
+        });
+    </script>
 </body>
 
 </html>
