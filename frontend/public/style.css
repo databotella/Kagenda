@@ -1,9 +1,54 @@
+/* Estilo normal */
+.logo-container {
+	text-align: center;
+	margin-bottom: 20px;
+	max-width: 200px;
+}
+
+.logo {
+	max-width: 100%;
+	height: auto;
+	animation: fadeIn 1s ease-in-out;
+}
+
+img {
+	overflow-clip-margin: content-box;
+	overflow: clip;
+}
+
+/* Responsividade para tamanhos menores */
+@media (max-width: 768px) {
+	.logo-container {
+		max-width: 150px;
+	}
+
+	.logo {
+		max-width: 100%;
+	}
+}
+
+@media only screen and (max-width: 1080px) {
+	.logo {
+		width: 70px;
+	}
+}
+
+/* Ajustes globais */
+html,
+body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
-	background-color: #f8f9fa;
+	background-color: hsl(210, 17%, 98%);
+	overflow: hidden;
+	/* Evita rolagem no body */
 }
 
 .login-container {
@@ -13,6 +58,11 @@ body {
 	background-color: #fff;
 	border-radius: 10px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+	transition: transform 0.3s ease;
+}
+
+.login-container:hover {
+	transform: scale(1.05);
 }
 
 .form-group {
@@ -24,4 +74,38 @@ body {
 	right: 10px;
 	top: 50%;
 	transform: translateY(-50%);
+}
+
+button {
+	margin-top: 15px;
+}
+
+/* Animação de fade-in para a logo */
+@keyframes fadeIn {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
+	}
+}
+
+/* Animação de abertura de agenda */
+@keyframes openBook {
+	0% {
+		transform: perspective(600px) rotateY(0);
+	}
+
+	50% {
+		transform: perspective(600px) rotateY(90deg);
+	}
+
+	100% {
+		transform: perspective(600px) rotateY(180deg);
+	}
+}
+
+.agenda {
+	animation: openBook 1s ease-in-out;
 }
