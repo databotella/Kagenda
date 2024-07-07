@@ -6,13 +6,13 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, 'preload.js'),
+            preload: path.join(__dirname, 'frontend/public/preload.js'), // Atualize o caminho para o preload.js
             nodeIntegration: true,
             contextIsolation: false,
         },
     });
 
-    mainWindow.loadFile('index.html');
+    mainWindow.loadFile(path.join(__dirname, 'frontend/public/index.html')); // Atualize o caminho para o index.html
 }
 
 app.whenReady().then(() => {
